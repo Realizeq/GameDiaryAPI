@@ -16,7 +16,6 @@ namespace GameDiary.API.Controllers
             _db = db;
         }
 
-        // GET /api/games — все игры
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -24,7 +23,6 @@ namespace GameDiary.API.Controllers
             return Ok(games);
         }
 
-        // GET /api/games/5 — одна игра
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -34,7 +32,6 @@ namespace GameDiary.API.Controllers
             return Ok(game);
         }
 
-        // POST /api/games — добавить игру
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Game game)
         {
@@ -44,7 +41,6 @@ namespace GameDiary.API.Controllers
             return Ok(game);
         }
 
-        // PUT /api/games/5 — обновить игру
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] Game updated)
         {
@@ -60,7 +56,6 @@ namespace GameDiary.API.Controllers
             return Ok(game);
         }
 
-        // DELETE /api/games/5 — удалить игру
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

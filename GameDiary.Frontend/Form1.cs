@@ -1,4 +1,4 @@
-using System.Net.Http;
+п»їusing System.Net.Http;
 using System.Text;
 using System.Text.Json;
 
@@ -12,19 +12,58 @@ namespace GameDiary.Frontend
         public Form1()
         {
             InitializeComponent();
-            // Игнорируем SSL сертификат (для локальной разработки)
+            this.BackColor = Color.FromArgb(27, 40, 56);
+            this.ForeColor = Color.White;
+
+            dgvGames.BackgroundColor = Color.FromArgb(27, 40, 56);
+            dgvGames.DefaultCellStyle.BackColor = Color.FromArgb(32, 48, 68);
+            dgvGames.DefaultCellStyle.ForeColor = Color.White;
+            dgvGames.DefaultCellStyle.SelectionBackColor = Color.FromArgb(66, 165, 245);
+            dgvGames.DefaultCellStyle.SelectionForeColor = Color.White;
+            dgvGames.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(20, 30, 48);
+            dgvGames.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(100, 180, 255);
+            dgvGames.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            dgvGames.DefaultCellStyle.Font = new Font("Segoe UI", 9);
+            dgvGames.GridColor = Color.FromArgb(50, 70, 90);
+            dgvGames.EnableHeadersVisualStyles = false;
+
+            btnAdd.BackColor = Color.FromArgb(66, 165, 245);
+            btnAdd.ForeColor = Color.White;
+            btnAdd.FlatStyle = FlatStyle.Flat;
+            btnAdd.FlatAppearance.BorderSize = 0;
+            btnAdd.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
+            btnDelete.BackColor = Color.FromArgb(200, 60, 60);
+            btnDelete.ForeColor = Color.White;
+            btnDelete.FlatStyle = FlatStyle.Flat;
+            btnDelete.FlatAppearance.BorderSize = 0;
+            btnDelete.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
+            btnRefresh.BackColor = Color.FromArgb(50, 70, 90);
+            btnRefresh.ForeColor = Color.White;
+            btnRefresh.FlatStyle = FlatStyle.Flat;
+            btnRefresh.FlatAppearance.BorderSize = 0;
+            btnRefresh.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
+            btnEdit.BackColor = Color.FromArgb(80, 140, 80);
+            btnEdit.ForeColor = Color.White;
+            btnEdit.FlatStyle = FlatStyle.Flat;
+            btnEdit.FlatAppearance.BorderSize = 0;
+            btnEdit.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
+            this.Font = new Font("Segoe UI", 9);
+            this.Text = "РРіСЂРѕРІРѕР№ РґРЅРµРІРЅРёРє";
+            
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (m, c, ch, e) => true;
             _client = new HttpClient(handler);
         }
 
-        // Загрузка игр при открытии формы
         private async void Form1_Load(object sender, EventArgs e)
         {
             await LoadGames();
         }
 
-        // Получить все игры с API
         private async Task LoadGames()
         {
             try
@@ -35,25 +74,22 @@ namespace GameDiary.Frontend
 
                 dgvGames.DataSource = games;
 
-                // Переименуем колонки на русский
                 if (dgvGames.Columns["Id"] != null) dgvGames.Columns["Id"].HeaderText = "ID";
-                if (dgvGames.Columns["Title"] != null) dgvGames.Columns["Title"].HeaderText = "Название";
-                if (dgvGames.Columns["Platform"] != null) dgvGames.Columns["Platform"].HeaderText = "Платформа";
-                if (dgvGames.Columns["Status"] != null) dgvGames.Columns["Status"].HeaderText = "Статус";
-                if (dgvGames.Columns["AddedAt"] != null) dgvGames.Columns["AddedAt"].HeaderText = "Добавлена";
+                if (dgvGames.Columns["Title"] != null) dgvGames.Columns["Title"].HeaderText = "РќР°Р·РІР°РЅРёРµ";
+                if (dgvGames.Columns["Platform"] != null) dgvGames.Columns["Platform"].HeaderText = "РџР»Р°С‚С„РѕСЂРјР°";
+                if (dgvGames.Columns["Status"] != null) dgvGames.Columns["Status"].HeaderText = "РЎС‚Р°С‚СѓСЃ";
+                if (dgvGames.Columns["AddedAt"] != null) dgvGames.Columns["AddedAt"].HeaderText = "Р”РѕР±Р°РІР»РµРЅР°";
                 if (dgvGames.Columns["CoverImageUrl"] != null) dgvGames.Columns["CoverImageUrl"].Visible = false;
                 if (dgvGames.Columns["Reviews"] != null) dgvGames.Columns["Reviews"].Visible = false;
 
-                // Добавляем колонку оценки если её нет
-                if (!dgvGames.Columns.Contains("Оценка"))
+                if (!dgvGames.Columns.Contains("РћС†РµРЅРєР°"))
                 {
                     var ratingColumn = new DataGridViewTextBoxColumn();
-                    ratingColumn.Name = "Оценка";
-                    ratingColumn.HeaderText = "Оценка";
+                    ratingColumn.Name = "РћС†РµРЅРєР°";
+                    ratingColumn.HeaderText = "РћС†РµРЅРєР°";
                     dgvGames.Columns.Add(ratingColumn);
                 }
 
-                // Заполняем оценки
                 foreach (DataGridViewRow row in dgvGames.Rows)
                 {
                     var gameDto = row.DataBoundItem as GameDto;
@@ -62,27 +98,37 @@ namespace GameDiary.Frontend
                         var firstReview = System.Text.Json.JsonSerializer.Deserialize<ReviewDto>(
                             gameDto.Reviews[0].ToString()!,
                             new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                        row.Cells["Оценка"].Value = firstReview?.Rating + "/10";
+                        row.Cells["РћС†РµРЅРєР°"].Value = firstReview?.Rating + "/10";
                     }
                     else
                     {
-                        row.Cells["Оценка"].Value = "—";
+                        row.Cells["РћС†РµРЅРєР°"].Value = "вЂ”";
                     }
+
+                    var status = row.Cells["Status"].Value?.ToString();
+                    if (status == "РџСЂРѕР№РґРµРЅР°")
+                        row.Cells["Status"].Style.ForeColor = Color.FromArgb(100, 220, 100);
+                    else if (status == "Р’ РїСЂРѕС†РµСЃСЃРµ")
+                        row.Cells["Status"].Style.ForeColor = Color.FromArgb(255, 200, 50);
+                    else if (status == "Р‘СЂРѕС€РµРЅР°")
+                        row.Cells["Status"].Style.ForeColor = Color.FromArgb(220, 80, 80);
+                    else if (status == "Р’РёС€Р»РёСЃС‚")
+                        row.Cells["Status"].Style.ForeColor = Color.FromArgb(130, 180, 255);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка загрузки: " + ex.Message);
+                MessageBox.Show("РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё: " + ex.Message);
             }
         }
 
-        // Кнопка "Обновить список"
+
         private async void btnRefresh_Click(object sender, EventArgs e)
         {
             await LoadGames();
         }
 
-        // Кнопка "Добавить игру"
+
         private async void btnAdd_Click(object sender, EventArgs e)
         {
             var addForm = new AddGameForm();
@@ -95,8 +141,6 @@ namespace GameDiary.Frontend
                     status = addForm.Status,
                     coverImageUrl = ""
                 };
-
-                // Добавляем отзыв с оценкой после создания игры
 
                 var json = System.Text.Json.JsonSerializer.Serialize(game);
                 var content = new System.Net.Http.StringContent(json, System.Text.Encoding.UTF8, "application/json");
@@ -119,28 +163,27 @@ namespace GameDiary.Frontend
 
                     try
                     {
-                        var reviewResponse = await _client.PostAsync("https://localhost:7064/api/reviews", reviewContent);
+                        var reviewResponse = await _client.PutAsync("https://localhost:7064/api/reviews/game/" + createdGame.Id, reviewContent);
                         var reviewBody = await reviewResponse.Content.ReadAsStringAsync();
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Ошибка отзыва: " + ex.Message);
+                        MessageBox.Show("РћС€РёР±РєР° РѕС‚Р·С‹РІР°: " + ex.Message);
                     }
                 }
             }
         }
 
-        // Кнопка "Удалить"
         private async void btnDelete_Click(object sender, EventArgs e)
         {
             if (dgvGames.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Выбери игру для удаления!");
+                MessageBox.Show("Р’С‹Р±РµСЂРё РёРіСЂСѓ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ!");
                 return;
             }
 
             var id = (int)dgvGames.SelectedRows[0].Cells["Id"].Value;
-            var confirm = MessageBox.Show("Удалить игру?", "Подтверждение",
+            var confirm = MessageBox.Show("РЈРґР°Р»РёС‚СЊ РёРіСЂСѓ?", "РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ",
                 MessageBoxButtons.YesNo);
 
             if (confirm == DialogResult.Yes)
@@ -156,7 +199,7 @@ namespace GameDiary.Frontend
         {
             if (dgvGames.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Выбери игру для редактирования!");
+                MessageBox.Show("Р’С‹Р±РµСЂРё РёРіСЂСѓ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ!");
                 return;
             }
 
@@ -165,7 +208,13 @@ namespace GameDiary.Frontend
             var platform = dgvGames.SelectedRows[0].Cells["Platform"].Value.ToString();
             var status = dgvGames.SelectedRows[0].Cells["Status"].Value.ToString();
 
-            var editForm = new EditGameForm(id, title, platform, status);
+            var currentRating = 5;
+            var ratingCell = dgvGames.SelectedRows[0].Cells["РћС†РµРЅРєР°"].Value?.ToString();
+            if (ratingCell != null && ratingCell != "вЂ”")
+            {
+                int.TryParse(ratingCell.Replace("/10", ""), out currentRating);
+            }
+            var editForm = new EditGameForm(id, title, platform, status, currentRating);
             if (editForm.ShowDialog() == DialogResult.OK)
             {
                 var updated = new
@@ -180,10 +229,21 @@ namespace GameDiary.Frontend
                 var content = new System.Net.Http.StringContent(json,
                     System.Text.Encoding.UTF8, "application/json");
                 await _client.PutAsync(ApiUrl + "/" + id, content);
+
+                var review = new
+                {
+                    gameId = id,
+                    rating = editForm.Rating,
+                    comment = ""
+                };
+                var reviewJson = System.Text.Json.JsonSerializer.Serialize(review);
+                var reviewContent = new System.Net.Http.StringContent(reviewJson,
+                    System.Text.Encoding.UTF8, "application/json");
+                await _client.PutAsync("https://localhost:7064/api/reviews/game/" + id, reviewContent);
+
                 await LoadGames();
             }
         }
-        // Класс для чтения данных из API
         public class GameDto
         {
             public int Id { get; set; }

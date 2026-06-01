@@ -44,6 +44,7 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Location = new Point(12, 47);
             label1.Name = "label1";
             label1.Size = new Size(90, 15);
@@ -54,6 +55,7 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
             label2.Location = new Point(12, 79);
             label2.Name = "label2";
             label2.Size = new Size(72, 15);
@@ -64,6 +66,7 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
             label3.Location = new Point(12, 108);
             label3.Name = "label3";
             label3.Size = new Size(43, 15);
@@ -117,6 +120,7 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
             label4.Location = new Point(12, 140);
             label4.Name = "label4";
             label4.Size = new Size(82, 15);
@@ -138,7 +142,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(621, 288);
+            ClientSize = new Size(734, 311);
             Controls.Add(nudRating);
             Controls.Add(label4);
             Controls.Add(btnCancel);
@@ -150,7 +154,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "AddGameForm";
-            Text = "AddGameForm";
+            Text = "Добавление игры";
             ((System.ComponentModel.ISupportInitialize)nudRating).EndInit();
             ResumeLayout(false);
             PerformLayout();

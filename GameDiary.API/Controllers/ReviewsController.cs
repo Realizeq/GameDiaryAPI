@@ -16,7 +16,6 @@ namespace GameDiary.API.Controllers
             _db = db;
         }
 
-        // POST /api/reviews — добавить отзыв к игре
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Review review)
         {
@@ -29,7 +28,6 @@ namespace GameDiary.API.Controllers
             return Ok(review);
         }
 
-        // GET /api/reviews/game/5 — все отзывы одной игры
         [HttpGet("game/{gameId}")]
         public async Task<IActionResult> GetByGame(int gameId)
         {
@@ -39,7 +37,6 @@ namespace GameDiary.API.Controllers
             return Ok(reviews);
         }
 
-        // DELETE /api/reviews/5 — удалить отзыв
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -49,6 +46,27 @@ namespace GameDiary.API.Controllers
             _db.Reviews.Remove(review);
             await _db.SaveChangesAsync();
             return Ok("Отзыв удалён");
+        }
+
+        [HttpPut("game/{gameId}")]
+        public async Task<IActionResult> UpdateByGame(int gameId, [FromBody] Review updated)
+        {
+            var review = await _db.Reviews.FirstOrDefaultAsync(r => r.GameId == gameId);
+
+            if (review == null)
+            {
+                updated.GameId = gameId;
+                updated.CreatedAt = DateTime.Now;
+                _db.Reviews.Add(updated);
+            }
+            else
+            {
+                review.Rating = updated.Rating;
+                review.Comment = updated.Comment;
+            }
+
+            await _db.SaveChangesAsync();
+            return Ok();
         }
     }
 }

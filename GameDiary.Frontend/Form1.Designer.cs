@@ -38,7 +38,9 @@
             // 
             // dgvGames
             // 
+            dgvGames.BackgroundColor = Color.FromArgb(27, 40, 56);
             dgvGames.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvGames.GridColor = Color.White;
             dgvGames.Location = new Point(12, 41);
             dgvGames.Name = "dgvGames";
             dgvGames.Size = new Size(679, 241);
@@ -46,12 +48,13 @@
             // 
             // btnAdd
             // 
+            btnAdd.BackColor = Color.LightBlue;
             btnAdd.Location = new Point(12, 12);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(168, 23);
             btnAdd.TabIndex = 1;
             btnAdd.Text = "Добавить игру";
-            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.UseVisualStyleBackColor = false;
             btnAdd.Click += btnAdd_Click;
             // 
             // btnDelete
@@ -76,26 +79,29 @@
             // 
             // btnEdit
             // 
+            btnEdit.BackColor = Color.LightBlue;
             btnEdit.Location = new Point(186, 12);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(108, 23);
             btnEdit.TabIndex = 4;
             btnEdit.Text = "Редактировать";
-            btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.UseVisualStyleBackColor = false;
             btnEdit.Click += btnEdit_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(746, 330);
+            BackColor = Color.FromArgb(27, 40, 56);
+            BackgroundImageLayout = ImageLayout.None;
+            ClientSize = new Size(734, 321);
             Controls.Add(btnRefresh);
             Controls.Add(btnDelete);
             Controls.Add(btnAdd);
             Controls.Add(btnEdit);
             Controls.Add(dgvGames);
             Name = "Form1";
-            Text = "Game Diary";
+            Text = "Игровой дневник";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dgvGames).EndInit();
             ResumeLayout(false);
