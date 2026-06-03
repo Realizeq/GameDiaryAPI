@@ -1,0 +1,28 @@
+import sqlite3
+
+conn = sqlite3.connect('gamediary.db')
+cursor = conn.cursor()
+
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS Games (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Title TEXT NOT NULL,
+    Platform TEXT,
+    Status TEXT,
+    AddedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+''')
+
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS Reviews (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    GameId INTEGER,
+    Rating INTEGER CHECK(Rating >= 1 AND Rating <= 10),
+    Comment TEXT,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (GameId) REFERENCES Games(Id)
+)
+''')
+
+conn.commit()
+conn.close()
