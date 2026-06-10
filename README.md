@@ -9,6 +9,15 @@
 - Цветные статусы: Пройдена / В процессе / Брошена / Вишлист
 - Статистика коллекции
 
+## Скачать и запустить
+
+1. Скачать архив на [странице](https://github.com/Realizeq/GameDiary/releases/latest)
+2. Распаковать в любую папку
+3. Запустить `GameDiary.Frontend.exe`
+
+
+
+
 ## Технологии
 
 - **Frontend** — WinForms
@@ -16,11 +25,7 @@
 - **База данных** — SQLite (реляционная)
 - **Архитектура** — Монолитная
 
-## Скачать и запустить
 
-1. Скачать архив на [странице](https://github.com/Realizeq/GameDiary/releases/latest)
-2. Распаковать в любую папку
-3. Запустить `GameDiary.Frontend.exe`
 
 ## Команда
 - Realizeq - Backend (ASP.NET Core API)
