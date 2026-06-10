@@ -18,7 +18,7 @@
 
 ## Скачать и запустить
 
-1. Скачать архив на странице [Releases](https://github.com/Realizeq/GameDiary/releases/latest)
+1. Скачать архив на [странице](https://github.com/Realizeq/GameDiary/releases/latest)
 2. Распаковать в любую папку
 3. Запустить `GameDiary.Frontend.exe`
 
