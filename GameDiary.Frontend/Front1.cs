@@ -72,7 +72,6 @@ namespace GameDiary.Frontend
                     Color.FromArgb(60, 80, 100), 1, ButtonBorderStyle.Solid);
             };
 
-            // Шапка окна
             var titlePanel = new Panel();
             titlePanel.Size = new Size(this.ClientSize.Width, 35);
             titlePanel.Location = new Point(0, 0);
@@ -118,7 +117,6 @@ namespace GameDiary.Frontend
             btnMinimize.Click += (s, e) => this.WindowState = FormWindowState.Minimized;
             titlePanel.Controls.Add(btnMinimize);
 
-            // Перетаскивание за шапку
             bool dragging = false;
             Point dragStart = Point.Empty;
             titlePanel.MouseDown += (s, e) => { dragging = true; dragStart = e.Location; };
