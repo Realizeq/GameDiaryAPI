@@ -23,6 +23,6 @@
 3. Запустить `GameDiary.Frontend.exe`
 
 ## Команда
-Realizeq - Backend (ASP.NET Core API)
-ritmixxx - Frontend (WinForms)
-mark01098 - База данных (Python)
+- Realizeq - Backend (ASP.NET Core API)
+- ritmixxx - Frontend (WinForms)
+- mark01098 - База данных (Python)
