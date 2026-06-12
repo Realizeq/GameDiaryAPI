@@ -29,5 +29,5 @@
 
 ## Команда
 - Realizeq - Backend (ASP.NET Core API)
-- ritmixxx - Frontend (WinForms)
-- mark01098 - База данных (Python)
+- mark01098 - Frontend (WinForms)
+- ritmixxx - База данных (Python)
